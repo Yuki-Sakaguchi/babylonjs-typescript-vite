@@ -1,24 +1,31 @@
 import "./style.scss";
-import typescriptLogo from "./typescript.svg";
-import viteLogo from "/vite.svg";
-import { setupCounter } from "./counter.ts";
+import * as BABYLON from "@babylonjs/core";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`;
+const main = () => {
+  // キャンバスを取得
+  const renderCanvas = <HTMLCanvasElement>(
+    document.getElementById("renderCanvas")
+  );
 
-setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
+  if (renderCanvas) {
+    // シーンを作成
+    const engine = new BABYLON.Engine(renderCanvas, true);
+    const scene = new BABYLON.Scene(engine);
+
+    // カメラとライトを設定
+    scene.createDefaultCameraOrLight(true, true, true);
+    scene.createDefaultEnvironment();
+
+    // 箱を生成
+    const boxSize = 0.2;
+    const box = BABYLON.MeshBuilder.CreateBox("box", { size: boxSize });
+    box.position.addInPlaceFromFloats(0, boxSize / 2.0, 0);
+
+    // レンダリング
+    engine.runRenderLoop(() => {
+      scene.render();
+    });
+  }
+};
+
+main();
