@@ -1,6 +1,6 @@
 # Vite + TypeScript + Babylon.js で WebAR を作る
 
-# WebAR を実行するために SSL 対応する
+## WebAR を実行するために SSL 対応する
 SSL でしか動かないので通常のローカルホスト立ち上げでは無く、証明書を作ってそれを使って立ち上げるようにする  
 以下のコマンドを叩いて `key.pem` と `cert.pem` を生成して、`npm run dev` をしないと動かない  
 これをすれば手元のスマホでも起動しているURLでサイトを閲覧することができます
@@ -31,3 +31,8 @@ export default defineConfig({
   },
 });
 ```
+
+## メモ
+* Babylon.js で WebXR を作ろうとしたけど、iOS には対応していないらしい...
+* Android でも使う時に ARKit のアプリのインストールをしないといけない
+* それだけ精度が良いんだろうけど、Webの気軽さがないかもなぁと感じた
